@@ -2,10 +2,11 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MovieHeader, MovieContext } from "./styles";
+import WatchedToggle from "./watchedToggle";
 
 const DETAILS_LIST_URL = "https://api.themoviedb.org/3/movie/500?api_key=29b93bae8c2da9ca4afabbd1384e3cc0";
 
-function Details({ toggle, closeDetails }) {
+function Details({ id, closeDetails, setWatchedMovie, getWatchedMovie }) {
     const [movie, setMovie] = useState({});
 
     function getNameFromArray(array) {
@@ -18,9 +19,9 @@ function Details({ toggle, closeDetails }) {
           .get(`${DETAILS_LIST_URL}`)
           .then((res) => setMovie(res.data));
     
-    }, [toggle, movie]);
+    }, []);
 
-    return toggle ? (
+    return id ? (
         <>
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -31,14 +32,7 @@ function Details({ toggle, closeDetails }) {
                   <MovieHeader>
                     {movie.title}
                   </MovieHeader>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => closeDetails()}
-                  >
-                    <span className="text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
+                  <WatchedToggle id={id} toggle={getWatchedMovie(id)} setWatchedMovie={setWatchedMovie}></WatchedToggle>
                 </div>
                 <div className="relative p-6 flex-auto">
                   <MovieContext>

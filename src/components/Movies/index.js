@@ -7,7 +7,7 @@ function Movies({ title, movies, showDetails }) {
             <MoviesRow>
                 {movies.map((movie) => (
                     <MoviesPoster key={movie.id}>
-                        <MoviesTitlePoster onClick={showDetails}>
+                        <MoviesTitlePoster onClick={(e) => showDetails(e, movie.id)}>
                             {movie.original_title}
                         </MoviesTitlePoster>
                         <MoviesContextPoster 

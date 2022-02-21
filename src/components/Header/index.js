@@ -19,7 +19,7 @@ function Header() {
     
     return (
         <HeaderContainer green={isGreen}>
-            Header --  Header --  Header --  Header --  Header --  Header --  Header --
+
         </HeaderContainer>
     );
 }
